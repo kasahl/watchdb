@@ -7,6 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+
+import serverproject.watchdb.domain.User;
+import serverproject.watchdb.domain.UserRepository;
 import serverproject.watchdb.domain.Watch;
 import serverproject.watchdb.domain.WatchRepository;
 
@@ -19,12 +22,17 @@ public class WatchdbApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner watchPlaceholder(WatchRepository repository) {
+	public CommandLineRunner watchPlaceholder(WatchRepository repository, UserRepository urepository) {
 		return (args) -> {
 			 log.info("save some watches");
 			
 			repository.save(new Watch("Rolex", "Submariner", 2020, "https://content.rolex.com/dam/new-watches-2020/new-submariner/new-submariner-m124060-0001-search.jpg"));
 			repository.save(new Watch("Omega", "Seamaster", 2019, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQ3XAHgFWO3qUuwLhCYEfYUyc7BIVxf1GGw&usqp=CAU"));	
+			
+			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
+			User user2 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
+			urepository.save(user1);
+			urepository.save(user2);
 			
 			log.info("fetch all watches");
 			for (Watch watch : repository.findAll()) {

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,11 @@ public class WatchController {
 
 	@Autowired
 	private WatchRepository repository;
+	
+	@RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
 	
 	@RequestMapping("/hello")
 	public String greeting(@RequestParam(value="name")String name, Model model) {
@@ -55,12 +61,14 @@ public class WatchController {
 	    return "redirect:watchlist";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteWatch(@PathVariable("id") Long watchId, Model model) {
     	repository.deleteById(watchId);
         return "redirect:../watchlist";
     }
     
+	@PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
 	public String modifyBook(@PathVariable("id") Long watchId, Model model) {
 		Optional<Watch> watch = repository.findById(watchId);
