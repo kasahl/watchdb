@@ -7,16 +7,21 @@
 </head>
 	<body>
 		<div>
+			<h2>Welcome to WatchDB</h2>
+		</div>
+		<div>
 			<table class="table table-striped">
 				<tr>
 		   		 <th>Brand</th>
 		   		 <th>Model</th>
 		   		 <th>Year</th>
+		   		 <th>Picture</th>
 				</tr>  
     			<tr th:each = "watch : ${watches}">
     				<td th:text="${watch.brand}"></td>
     				<td th:text="${watch.model}"></td>
-    				<td th:text="${watch.year}"></td> 
+    				<td th:text="${watch.year}"></td>
+    				<td><a href={watch.picture}></a></td>
     				<td><a th:href="@{/delete/{id}(id=${watch.id})}"><button class="btn btn-success">Delete</button></a></td>
     				<td><a th:href="@{/edit/{id}(id=${watch.id})}"><button class="btn btn-primary">Edit</button></a></td>	    		
     			</tr>

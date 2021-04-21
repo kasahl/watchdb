@@ -23,8 +23,8 @@ public class WatchdbApplication {
 		return (args) -> {
 			 log.info("save some watches");
 			
-			repository.save(new Watch("Rolex", "Submariner", 2020));
-			repository.save(new Watch("Omega", "Seamaster", 2019));	
+			repository.save(new Watch("Rolex", "Submariner", 2020, "https://content.rolex.com/dam/new-watches-2020/new-submariner/new-submariner-m124060-0001-search.jpg"));
+			repository.save(new Watch("Omega", "Seamaster", 2019, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQ3XAHgFWO3qUuwLhCYEfYUyc7BIVxf1GGw&usqp=CAU"));	
 			
 			log.info("fetch all watches");
 			for (Watch watch : repository.findAll()) {

@@ -7,18 +7,7 @@
 </head>
 	<body>
 		<div>
-			<table class="table table-striped">
-				<tr>
-		   		 <th>Brand</th>
-		   		 <th>Model</th>
-		   		 <th>Year</th>
-				</tr>  
-    			<tr th:each = "watch : ${watches}">
-    				<td th:text="${watch.brand}"></td>
-    				<td th:text="${watch.model}"></td>
-    				<td th:text="${watch.year}"></td> 		    		
-    			</tr>
-     		</table>
+			<h2>Add a watch</h2>
 		</div>
 	 <form action="#" th:action="@{/save}" th:object=${watchlist} method="post">
 		<div>
@@ -29,6 +18,8 @@
          <input type="text" id= "model" th:field="${watch.model}" />
          <p>Year of release:</p>
          <input type="text" id= "year" th:field="${watch.year}" />
+         <p>Link to picture</p>
+         <input type="text" id= "picture" th:field="${watch.picture}" />
          <br><br>
          <input type="submit" value="Submit" class="btn btn-success" />
 		</div>
