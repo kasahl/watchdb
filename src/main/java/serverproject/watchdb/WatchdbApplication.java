@@ -26,9 +26,12 @@ public class WatchdbApplication {
 		return (args) -> {
 			 log.info("save some watches");
 			
+			 
+			//lisää 2 kellomallia tietokantaan
 			repository.save(new Watch("Rolex", "Submariner", 2020, "Steel"));
 			repository.save(new Watch("Omega", "Seamaster 300m", 2019, "Steel"));	
 			
+			//poistaa kaikka userit ja lisää user ja admin käyttäjät, tehty Postgresql yhteensopivuuden vuoksi
 			urepository.deleteAll();
 			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
 			User user2 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");

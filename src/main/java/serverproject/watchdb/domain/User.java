@@ -6,6 +6,8 @@ import javax.persistence.*;
 @Table(name="usertable")
 public class User {
 
+	//user getit ja setit, konstruktorit ja tostring
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
@@ -20,8 +22,7 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role;
     
-    public User() {
-    }
+    public User() {}
 
 	public User(String username, String passwordHash, String role) {
 		super();

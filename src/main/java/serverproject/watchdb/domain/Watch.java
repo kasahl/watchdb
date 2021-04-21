@@ -8,6 +8,8 @@ import javax.persistence.Id;
 @Entity
 public class Watch {
 
+	//watch setit ja getit, konstruktorit ja tostring
+	
 	   @Id
 	   @GeneratedValue(strategy=GenerationType.AUTO)
 	    private Long id;

@@ -27,40 +27,40 @@ public class WatchController {
         return "login";
     }	
 	
-	@RequestMapping("/hello")
-	public String greeting(@RequestParam(value="name")String name, Model model) {
-		model.addAttribute("name", name);
-		return "hello";
-	}
-	
+	//ohjelman perusnäkymä
 	@RequestMapping("/watchlist")
 	public String watchList(Model model) {	
 		model.addAttribute("watches", repository.findAll());
 		return "watchlist";
 	}
 	
+	//rest json
 	@RequestMapping(value="/watches")
     public @ResponseBody List<Watch> watchlistRest() {	
         return (List<Watch>) repository.findAll();
     }  
 	
+	//rest jolla pystyy etsiä tietokannasta idllä
 	@RequestMapping(value="/watch/{id}", method = RequestMethod.GET)
     public @ResponseBody Optional<Watch> WatchRest(@PathVariable("id") Long watchId) {	
     	return repository.findById(watchId);
 	}
 	 
+	//vie käyttäjän sivulle, jossa pystyy lisäämään uuden kellon
 	@RequestMapping(value="/addwatch")
 	public String addWatch(Model model){
 	    model.addAttribute("watch", new Watch());
 	    return "addwatch";
 	}     
 	    
+	//tallentaa ja tuo käyttäjän takaisin kellolistalle
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Watch watch){
 	    repository.save(watch);
 	    return "redirect:watchlist";
 	}
 	
+	//poistotoiminto, johon pitää olla ADMIN
 	@PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteWatch(@PathVariable("id") Long watchId, Model model) {
@@ -68,6 +68,7 @@ public class WatchController {
         return "redirect:../watchlist";
     }
     
+	//muokkaus toiminto, johon pitää olla ADMIN
 	@PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
 	public String modifyBook(@PathVariable("id") Long watchId, Model model) {

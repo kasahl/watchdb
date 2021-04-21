@@ -19,6 +19,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailServiceImpl userDetailsService;	
 	
+    //Perus web security config, ei mitään erityistä
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
