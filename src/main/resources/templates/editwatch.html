@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add a new watch</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+	<body>
+		<div>
+			<table class="table table-striped">
+				<tr>
+		   		 <th>Brand</th>
+		   		 <th>Model</th>
+		   		 <th>Year</th>
+				</tr>  
+    			<tr th:each = "watch : ${watches}">
+    				<td th:text="${watch.brand}"></td>
+    				<td th:text="${watch.model}"></td>
+    				<td th:text="${watch.year}"></td> 		    		
+    			</tr>
+     		</table>
+		</div>
+	 <form action="#" th:action="@{/save}" th:object=${watchlist} method="post">
+		<div>
+		 <p>Brand:</p>
+		 <input type="text" id= "brand" th:field="${watch.brand}" />
+         <input type="hidden" th:field="${watch.id}" />
+         <p>Model:</p>
+         <input type="text" id= "model" th:field="${watch.model}" />
+         <p>Year of release:</p>
+         <input type="text" id= "year" th:field="${watch.year}" />
+         <br><br>
+         <input type="submit" value="Submit" class="btn btn-success" />
+		</div>
+	 </form>
+	</body>
+</html>

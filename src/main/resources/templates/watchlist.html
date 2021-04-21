@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Watchlist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+	<body>
+		<div>
+			<table class="table table-striped">
+				<tr>
+		   		 <th>Brand</th>
+		   		 <th>Model</th>
+		   		 <th>Year</th>
+				</tr>  
+    			<tr th:each = "watch : ${watches}">
+    				<td th:text="${watch.brand}"></td>
+    				<td th:text="${watch.model}"></td>
+    				<td th:text="${watch.year}"></td> 
+    				<td><a th:href="@{/delete/{id}(id=${watch.id})}"><button class="btn btn-success">Delete</button></a></td>
+    				<td><a th:href="@{/edit/{id}(id=${watch.id})}"><button class="btn btn-primary">Edit</button></a></td>	    		
+    			</tr>
+     		</table>
+		</div>
+		<a href="/addwatch"><button class="btn btn-success">Add a new watch</button></a>
+	</body>
+</html>
