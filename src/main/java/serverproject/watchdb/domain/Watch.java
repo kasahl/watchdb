@@ -14,17 +14,17 @@ public class Watch {
 	    private String brand;
 	    private String model;
 	    private int year;
-	    private String picture;
+	    private String material;
 	    
 		public Watch() {}
 		
-		public Watch(String brand, String model, int year, String picture) {
+		public Watch(String brand, String model, int year, String material) {
 			super();
 			this.id = id;
 			this.brand = brand;
 			this.model = model;
 			this.year = year;
-			this.picture = picture;
+			this.material = material;
 		}
 
 		public Long getId() {
@@ -59,17 +59,17 @@ public class Watch {
 			this.year = year;
 		}
 
-		public String getPicture() {
-			return picture;
+		public String getMaterial() {
+			return material;
 		}
 
-		public void setPicture(String picture) {
-			this.picture = picture;
+		public void setMaterial(String material) {
+			this.material = material;
 		}
 
 		@Override
 		public String toString() {
-			return "Watch [id=" + id + ", brand=" + brand + ", model=" + model + ", year=" + year + ", picture="
-					+ picture + "]";
+			return "Watch [id=" + id + ", brand=" + brand + ", model=" + model + ", year=" + year + ", material="
+					+ material + "]";
 		}
 }
