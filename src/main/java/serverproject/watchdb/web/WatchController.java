@@ -1,17 +1,28 @@
 package serverproject.watchdb.web;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import serverproject.watchdb.domain.Watch;
 import serverproject.watchdb.domain.WatchRepository;
@@ -54,11 +65,27 @@ public class WatchController {
 	}     
 	    
 	//tallentaa ja tuo käyttäjän takaisin kellolistalle
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(Watch watch){
-	    repository.save(watch);
-	    return "redirect:watchlist";
-	}
+	//@RequestMapping(value="/save", method = RequestMethod.POST)
+	//public String save(Watch watch){
+	//   repository.save(watch);
+	//    return "redirect:watchlist";
+	//}
+	
+	@PostMapping("/save")
+    public RedirectView saveWatch(Watch watch,
+            @RequestParam("image") MultipartFile multipartFile) throws IOException {
+         
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        watch.setPhotos(fileName);
+         
+        Watch savedWatch = repository.save(watch);
+ 
+        String uploadDir = "watch-photos/" + savedWatch.getId();
+ 
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+         
+        return new RedirectView("/watchlist", true);
+    }
 	
 	//poistotoiminto, johon pitää olla ADMIN
 	@PreAuthorize("hasAuthority('ADMIN')")

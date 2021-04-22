@@ -9,7 +9,7 @@
 		<div>
 			<h2>Add a watch</h2>
 		</div>
-	 <form action="#" th:action="@{/save}" th:object=${watchlist} method="post">
+	 <form action="#" th:action="@{/save}" th:object=${watchlist} enctype="multipart/form-data" method="post">
 		<div>
 		 <p>Brand:</p>
 		 <input type="text" id= "brand" th:field="${watch.brand}" />
@@ -18,11 +18,16 @@
          <input type="text" id= "model" th:field="${watch.model}" />
          <p>Year of release:</p>
          <input type="text" id= "year" th:field="${watch.year}" />
-         <p>Material</p>
+         <p>Material:</p>
          <input type="text" id= "material" th:field="${watch.material}" />
+         <p>Upload a photo</p>
+         <input type="file" name="image" accept="image/png, image/jpeg" />
          <br><br>
          <input type="submit" value="Submit" class="btn btn-success" />
 		</div>
-	 </form>
+	 <!-- </form>
+	 //<form th:action="@{/watch/save}" th:object="${user}" method="post" enctype="multipart/form-data">
+	 
+	 </from> -->
 	</body>
 </html>

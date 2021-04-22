@@ -20,12 +20,14 @@
 		   		 <th>Model</th>
 		   		 <th>Year</th>
 		   		 <th>Material</th>
+		   		 <th>Picture</th>
 				</tr>  
     			<tr th:each = "watch : ${watches}">
     				<td th:text="${watch.brand}"></td>
     				<td th:text="${watch.model}"></td>
     				<td th:text="${watch.year}"></td>
     				<td th:text="${watch.material}"></td>
+    				<td><img th:src="${watch.photosImagePath}" /></td>
     				<td sec:authorize="hasAuthority('ADMIN')"> <a th:href="@{/delete/{id}(id=${watch.id})}"><button class="btn btn-success">Delete</button></a></td>
     				<td sec:authorize="hasAuthority('ADMIN')"> <a th:href="@{/edit/{id}(id=${watch.id})}"><button class="btn btn-primary">Edit</button></a></td> 		
     			</tr>

@@ -1,9 +1,12 @@
 package serverproject.watchdb.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.data.annotation.Transient;
 
 @Entity
 public class Watch {
@@ -18,6 +21,26 @@ public class Watch {
 	    private int year;
 	    private String material;
 	    
+	    
+	    //kuvan upload get ja set
+	    @Column(nullable = true, length = 64)
+	    private String photos;
+	    
+	    @Transient
+	    public String getPhotosImagePath() {
+	        if (photos == null || id == null) return null;
+	         
+	        return "/watch-photos/" + id + "/" + photos;
+	    }
+	    
+		public String getPhotos() {
+			return photos;
+		}
+
+		public void setPhotos(String photos) {
+			this.photos = photos;
+		}
+
 		public Watch() {}
 		
 		public Watch(String brand, String model, int year, String material) {
@@ -74,4 +97,5 @@ public class Watch {
 			return "Watch [id=" + id + ", brand=" + brand + ", model=" + model + ", year=" + year + ", material="
 					+ material + "]";
 		}
+
 }
