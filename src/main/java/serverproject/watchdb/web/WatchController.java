@@ -58,6 +58,7 @@ public class WatchController {
 	}
 	 
 	//vie käyttäjän sivulle, jossa pystyy lisäämään uuden kellon
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value="/addwatch")
 	public String addWatch(Model model){
 	    model.addAttribute("watch", new Watch());

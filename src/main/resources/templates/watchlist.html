@@ -33,6 +33,6 @@
     			</tr>
      		</table>
 		
-		<a href="/addwatch"><button class="btn btn-success">Add a new watch</button></a>
+		<a sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/addwatch}"><button class="btn btn-success">Add a new watch</button></a>
 	</body>
 </html>
